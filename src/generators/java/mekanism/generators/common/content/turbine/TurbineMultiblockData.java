@@ -101,19 +101,6 @@ public class TurbineMultiblockData extends MultiblockData {
     }
 
     @Override
-    protected void updateEjectors(Level world) {
-        super.updateEjectors(world);
-        for (VentData data : ventData) {
-            TileEntityTurbineVent vent = WorldUtils.getTileEntity(TileEntityTurbineVent.class, world, data.location);
-            if (vent != null) {
-                //Ensure we don't use create a bunch of identical collections potentially using up a bunch of memory
-                Set<Direction> sides = SIDE_REFERENCES.computeIfAbsent(data.side, Collections::singleton);
-                vent.setEjectSides(sides);
-            }
-        }
-    }
-
-    @Override
     public boolean tick(Level world) {
         boolean needsPacket = super.tick(world);
 
